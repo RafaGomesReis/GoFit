@@ -14,12 +14,12 @@ Antes de começar, você precisa ter instalado em sua máquina:
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/RafaGomesReis/StriveFit.git
+git clone https://github.com/RafaGomesReis/GoFit.git
 ```
 
 2. Entre na pasta do projeto:
 ```bash
-cd StriveFit
+cd GoFit
 ```
 
 3. Instale as dependências:
