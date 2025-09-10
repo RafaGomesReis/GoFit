@@ -1,6 +1,6 @@
 # GoFit 🏋️‍♂️
 
-StriveFit é um aplicativo de fitness e bem-estar desenvolvido com React Native e Expo.
+GoFit é um aplicativo de fitness e bem-estar desenvolvido com React Native e Expo.
 
 ## 📋 Pré-requisitos
 
