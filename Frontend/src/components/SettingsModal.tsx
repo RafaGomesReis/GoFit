@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 
 interface SettingsModalProps {
   visible: boolean;
@@ -14,7 +15,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
       visible={visible}
       onRequestClose={onClose}
     >
-      <View style={styles.modalOverlay}>
+      <ScrollView style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>Configurações</Text>
@@ -73,7 +74,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </Modal>
   );
 }
