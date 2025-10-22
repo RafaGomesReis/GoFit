@@ -1,14 +1,35 @@
 # GoFit 🏋️‍♂️
 
-GoFit é um aplicativo de fitness e bem-estar desenvolvido com React Native e Expo.
+GoFit é um aplicativo de fitness e bem-estar desenvolvido com React Native CLI.
 
 ## 📋 Pré-requisitos
 
 Antes de começar, você precisa ter instalado em sua máquina:
-- [Node.js](https://nodejs.org/) (versão LTS recomendada)
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
 - [Git](https://git-scm.com/)
+- **Para Android**: [Android Studio](https://developer.android.com/studio) e configuração do ambiente Android
+- **Para iOS** (apenas macOS): [Xcode](https://developer.apple.com/xcode/) e CocoaPods
 
-> **Nota**: Não é necessário instalar o Expo CLI globalmente. O projeto usa `npx expo` que baixa automaticamente a versão necessária.
+### 🤖 Configuração do Ambiente Android
+
+1. Instale o [Android Studio](https://developer.android.com/studio)
+2. Durante a instalação, certifique-se de instalar:
+   - Android SDK
+   - Android SDK Platform
+   - Android Virtual Device (AVD)
+3. Configure as variáveis de ambiente:
+   - `ANDROID_HOME` apontando para o SDK do Android
+   - Adicione as ferramentas do Android ao PATH
+
+[Guia completo de configuração Android](https://reactnative.dev/docs/environment-setup?platform=android)
+
+### 🍎 Configuração do Ambiente iOS (apenas macOS)
+
+1. Instale o [Xcode](https://developer.apple.com/xcode/) pela App Store
+2. Instale as ferramentas de linha de comando: `xcode-select --install`
+3. Instale o CocoaPods: `sudo gem install cocoapods`
+
+[Guia completo de configuração iOS](https://reactnative.dev/docs/environment-setup?platform=ios)
 
 ## 🚀 Como executar o projeto
 
@@ -19,7 +40,7 @@ git clone https://github.com/RafaGomesReis/GoFit.git
 
 2. Entre na pasta do projeto:
 ```bash
-cd GoFit
+cd GoFit/Frontend
 ```
 
 3. Instale as dependências:
@@ -27,42 +48,39 @@ cd GoFit
 npm install
 ```
 
-4. Inicie o projeto:
+4. **Para iOS** (apenas macOS), instale os pods:
 ```bash
-npx expo start
+cd ios
+pod install
+cd ..
 ```
 
-> **Aviso**: Ao iniciar, você pode ver avisos sobre versões de pacotes que precisam ser atualizadas. Isso é normal e o projeto funcionará corretamente mesmo assim.
+5. Inicie o projeto:
 
-5. **Para visualizar o aplicativo**, você terá várias opções:
+### 🤖 Para Android:
+```bash
+npm run android
+```
+> Este comando irá iniciar o Metro Bundler e instalar o app no emulador/dispositivo Android
 
-### 📱 No Celular (Recomendado)
-- Instale o aplicativo **Expo Go** no seu celular:
-  - [Android - Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
-  - [iOS - App Store](https://apps.apple.com/app/expo-go/id982107779)
-- Escaneie o QR Code que aparecerá no terminal
-- O aplicativo será carregado diretamente no seu celular
+### 🍎 Para iOS (apenas macOS):
+```bash
+npm run ios
+```
+> Este comando irá iniciar o Metro Bundler e instalar o app no simulador iOS
 
-### 🌐 No Navegador Web
-- Pressione `w` no terminal para abrir no navegador
-- Útil para desenvolvimento e testes rápidos
+### Ou inicie o Metro Bundler separadamente:
+```bash
+npm start
+```
 
-### 📲 Em Emulador/Simulador
-- Pressione `a` para abrir no emulador Android (se configurado)
-- Pressione `i` para abrir no simulador iOS (apenas macOS)
+## ⌨️ Comandos Disponíveis
 
-### ⌨️ Comandos Disponíveis Durante a Execução
-Após iniciar o projeto, você pode usar os seguintes comandos no terminal:
-- `s` - Alternar para development build
-- `a` - Abrir no Android
-- `w` - Abrir no navegador web
-- `j` - Abrir debugger
-- `r` - Recarregar aplicativo
-- `m` - Alternar menu
-- `shift+m` - Mais ferramentas
-- `o` - Abrir código do projeto no editor
-- `?` - Mostrar todos os comandos
-- `Ctrl+C` - Parar o servidor
+- `npm start` - Inicia o Metro Bundler
+- `npm run android` - Roda o app no Android
+- `npm run ios` - Roda o app no iOS (apenas macOS)
+- `npm run lint` - Executa o linter
+- `npm test` - Executa os testes
 
 ## 📱 Funcionalidades
 
@@ -73,54 +91,88 @@ Após iniciar o projeto, você pode usar os seguintes comandos no terminal:
 
 ## 🛠️ Tecnologias Utilizadas
 
-- React Native
-- Expo
+- React Native CLI
 - TypeScript
+- React Navigation
+- Async Storage
 - Metro Bundler
 
 ## 🔧 Solução de Problemas
 
-### Avisos sobre versões de pacotes
-Se você ver avisos sobre versões desatualizadas dos pacotes, pode atualizá-los executando:
+### Erro ao iniciar o projeto
+Se você encontrar erros ao tentar iniciar o projeto:
+
+1. **Limpe o cache do Metro Bundler**:
 ```bash
-npx expo install --fix
+npm start -- --reset-cache
 ```
 
-### Tela Branca com Loading Infinito
-Se o aplicativo ficar com tela branca e loading infinito no Expo Go:
-
-1. **Limpe o cache e reinicie**:
+2. **Reinstale as dependências**:
 ```bash
-npx expo start --clear
-```
-
-2. **Feche completamente o Expo Go** no celular e abra novamente
-
-3. **Verifique a conexão de rede**:
-   - Certifique-se de que seu celular e computador estão na mesma rede Wi-Fi
-   - Tente desconectar e reconectar o Wi-Fi em ambos os dispositivos
-
-4. **Use o modo LAN (recomendado):**
-   - No terminal do Expo, pressione a tecla `l` para garantir que está em modo LAN
-   - Certifique-se de que o firewall do computador permite conexões nas portas do Expo (geralmente 19000 e 19001)
-   - Escaneie o QR Code ou digite manualmente o endereço IP mostrado no terminal no app Expo Go
-
-5. **Atualize as dependências**:
-```bash
+# Exclua a pasta node_modules e o package-lock.json
+rm -rf node_modules package-lock.json
 npm install
-npx expo install --fix
 ```
 
-6. **Verifique os logs no terminal** para possíveis erros durante o carregamento
+3. **Para iOS, limpe e reinstale os pods**:
+```bash
+cd ios
+rm -rf Pods Podfile.lock
+pod install
+cd ..
+```
 
-7. **Como última opção, reinicie o Metro Bundler**:
-   - Pressione `Ctrl+C` para parar o servidor
-   - Execute `npx expo start --clear` novamente
+### Erro no Android
 
-### Problemas com QR Code
-- Certifique-se de que seu celular e computador estão na mesma rede Wi-Fi
-- Se o QR Code não funcionar, tente usar o endereço `exp://` mostrado no terminal
-- Se continuar com problemas, tente reiniciar o Expo Go e o servidor Expo
+1. **Limpe o build do Android**:
+```bash
+cd android
+./gradlew clean
+cd ..
+```
+
+2. **Verifique se o emulador ou dispositivo está conectado**:
+```bash
+adb devices
+```
+
+3. **Certifique-se de que a variável ANDROID_HOME está configurada corretamente**
+
+### Erro no iOS (macOS)
+
+1. **Limpe o build do Xcode**:
+```bash
+cd ios
+xcodebuild clean
+cd ..
+```
+
+2. **Reinstale os pods**:
+```bash
+cd ios
+pod deintegrate
+pod install
+cd ..
+```
+
+### App trava ou não atualiza
+
+1. **Recarregue o app**:
+   - Android: Pressione `R` duas vezes ou use o menu de desenvolvedor (Ctrl+M no emulador)
+   - iOS: Pressione `Cmd+R` no simulador
+
+2. **Reinicie o Metro Bundler**:
+   - Pressione `Ctrl+C` para parar
+   - Execute `npm start` novamente
+
+3. **Verifique os logs no terminal** para possíveis erros
+
+### Problemas de conexão com o Metro Bundler
+
+- Certifique-se de que a porta 8081 está livre
+- Se necessário, mate processos que estejam usando a porta:
+  - Windows: `npx react-native start --port 8088` (usar outra porta)
+  - macOS/Linux: `lsof -ti:8081 | xargs kill`
 
 ## 👥 Contribuição
 
