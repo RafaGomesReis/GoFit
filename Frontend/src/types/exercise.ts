@@ -7,6 +7,7 @@ export interface Exercise {
   instructions: string[];
   videoUrl?: string;
   imageUrl?: string;
+  gifUrl?: string;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   description?: string;
 }

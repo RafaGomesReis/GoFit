@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 interface SettingsModalProps {
   visible: boolean;
@@ -15,7 +14,7 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
       visible={visible}
       onRequestClose={onClose}
     >
-      <ScrollView style={styles.modalOverlay}>
+      <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>Configurações</Text>
@@ -24,7 +23,8 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
             </TouchableOpacity>
           </View>
           
-          <View style={styles.section}>
+          <ScrollView style={styles.scrollContent}>
+            <View style={styles.section}>
             <Text style={styles.sectionTitle}>Conta</Text>
             <TouchableOpacity style={styles.settingItem}>
               <Text style={styles.settingText}>Editar Perfil</Text>
@@ -73,8 +73,9 @@ export default function SettingsModal({ visible, onClose }: SettingsModalProps) 
               <Text style={styles.logoutText}>Sair da Conta</Text>
             </TouchableOpacity>
           </View>
+          </ScrollView>
         </View>
-      </ScrollView>
+      </View>
     </Modal>
   );
 }
@@ -89,7 +90,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    maxHeight: '80%',
+    maxHeight: '100%',
+    overflow: 'hidden',
+  },
+  scrollContent: {
     paddingBottom: 20,
   },
   modalHeader: {
@@ -160,5 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#FF305B',
     fontWeight: '600',
+    marginBottom: 10,
   },
 });

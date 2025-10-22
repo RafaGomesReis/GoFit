@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,16 +11,38 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '../contexts/AppContext';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import WorkoutExecution from './WorkoutExecution';
+import CreateWorkout from './CreateWorkout';
+import { WorkoutSession } from '../types';
 
 export default function Workouts() {
-  const { state } = useApp();
+  const { state, dispatch } = useApp();
+  const [showExecution, setShowExecution] = useState(false);
+  const [showCreateWorkout, setShowCreateWorkout] = useState(false);
+  const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
 
   const handleCreateWorkout = () => {
-    console.log('Criar novo treino');
+    setShowCreateWorkout(true);
   };
 
   const handleStartWorkout = (workoutId: string) => {
-    console.log('Iniciar treino:', workoutId);
+    const workout = state.workouts.find(w => w.id === workoutId);
+    if (!workout) return;
+
+    const session: WorkoutSession = {
+      id: Date.now().toString(),
+      workoutId,
+      startedAt: new Date(),
+      exercises: workout.exercises.map(we => ({
+        exerciseId: we.id,
+        sets: [],
+        completed: false,
+      })),
+    };
+
+    dispatch({ type: 'SET_CURRENT_WORKOUT', payload: session });
+    setSelectedWorkoutId(workoutId);
+    setShowExecution(true);
   };
 
   const renderWorkoutCard = (workout: any) => (
@@ -82,6 +104,33 @@ export default function Workouts() {
           state.workouts.map(renderWorkoutCard)
         )}
       </ScrollView>
+
+      {/* Tela de Execução de Treino */}
+      {showExecution && selectedWorkoutId && (
+        <View style={styles.overlayContainer}>
+          <WorkoutExecution
+            workoutId={selectedWorkoutId}
+            onFinish={() => {
+              setShowExecution(false);
+              setSelectedWorkoutId(null);
+            }}
+            onCancel={() => {
+              setShowExecution(false);
+              setSelectedWorkoutId(null);
+            }}
+          />
+        </View>
+      )}
+
+      {/* Tela de Criar Treino */}
+      {showCreateWorkout && (
+        <View style={styles.overlayContainer}>
+          <CreateWorkout
+            onSave={() => setShowCreateWorkout(false)}
+            onCancel={() => setShowCreateWorkout(false)}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -139,5 +188,13 @@ const styles = StyleSheet.create({
   },
   createButton: {
     minWidth: 200,
+  },
+  overlayContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#FFFFFF',
   },
 });

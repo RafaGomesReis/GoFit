@@ -14,6 +14,7 @@ export const mockExercises: Exercise[] = [
       'Desça o corpo até quase tocar o chão',
       'Empurre para cima até a posição inicial'
     ],
+    gifUrl: 'https://i.pinimg.com/originals/18/27/be/1827be178c019b1dc6f8a8d211191f80.gif',
     difficulty: 'Beginner',
     description: 'Exercício clássico para desenvolvimento do peito e braços',
   },
@@ -30,6 +31,7 @@ export const mockExercises: Exercise[] = [
       'Vá até onde conseguir manter o equilíbrio',
       'Suba de volta à posição inicial'
     ],
+    gifUrl: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/03/bodyweight-squat.gif',
     difficulty: 'Beginner',
     description: 'Exercício fundamental para fortalecimento das pernas',
   },
@@ -46,6 +48,7 @@ export const mockExercises: Exercise[] = [
       'Contraia o abdômen',
       'Mantenha a posição pelo tempo determinado'
     ],
+    gifUrl: 'https://thumbs.gfycat.com/UniformUnsteadyBlackwidowspider-size_restricted.gif',
     difficulty: 'Beginner',
     description: 'Excelente para fortalecimento do core',
   },
@@ -62,6 +65,7 @@ export const mockExercises: Exercise[] = [
       'Empurre a barra para cima até a posição inicial',
       'Mantenha o controle durante todo o movimento'
     ],
+    gifUrl: 'https://www.hipertrofia.org/blog/wp-content/uploads/2023/07/barbell-lying-closegrip-press.gif',
     difficulty: 'Intermediate',
     description: 'Exercício clássico para desenvolvimento do peito',
   },
@@ -78,6 +82,7 @@ export const mockExercises: Exercise[] = [
       'Desça controladamente à posição inicial',
       'Mantenha o controle durante todo o movimento'
     ],
+    gifUrl: 'https://newlife.com.cy/wp-content/uploads/2019/11/00181301-Barbell-Curl_Upper-Arms_360.gif',
     difficulty: 'Beginner',
     description: 'Exercício isolado para desenvolvimento dos bíceps',
   },
@@ -86,7 +91,7 @@ export const mockExercises: Exercise[] = [
 export const mockWorkouts: Workout[] = [
   {
     id: '1',
-    name: 'Treino Iniciante',
+    name: 'Treino de Costas',
     description: 'Treino básico para quem está começando',
     exercises: [
       {
